@@ -20,7 +20,13 @@ namespace SweepStakes
 
         public SweepStakes GetSweepStakes()
         {
-            return sweepstakes.Dequeue();
+            try
+            {
+                return sweepstakes.Dequeue();
+            } catch (Exception E)
+            {
+                return null;
+            }
         }
     }
 }

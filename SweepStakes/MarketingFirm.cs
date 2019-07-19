@@ -6,10 +6,11 @@ namespace SweepStakes
 {
     public class MarketingFirm
     {
-
         public void pickWinner(SweepStakes s)
         {
-
+            Console.WriteLine($"Picking a winner for {s.name}");
+            Contestant winner = s.pickWinner();
+            Console.Write($"The winner is {winner.firstName} {winner.lastName}");
         }
         public MarketingFirm(string stackorqueue) //string here for using stack or queue
         {
@@ -46,33 +47,32 @@ namespace SweepStakes
 
             choice = 0;
 
-            SweepStakes currentSweepStakes = sweepstakesManager.GetSweepStakes();
-            while (choice != killSwitch)
+            do
             {
-                Console.WriteLine($"Registering Contestants for: {currentSweepStakes.name}");
-                choice = UI.promptForOptions("Enter another Contestant?", new List<string>(){
-                    "yes", "no"
-                });
-
-                if(choice == 0)
+                SweepStakes currentSweepStakes = sweepstakesManager.GetSweepStakes();
+                while (choice != killSwitch)
                 {
-                    Console.Write("First Name: ");
-                    string firstName = Console.ReadLine();
-                    Console.Write("Last Name: ");
-                    string lastName = Console.ReadLine();
-                    Console.Write("Email: ");
-                    string email = Console.ReadLine();
+                    Console.WriteLine($"Registering Contestants for: {currentSweepStakes.name}");
+                    choice = UI.promptForOptions("Enter another Contestant?", new List<string>(){
+                    "yes", "no"});
 
-                    currentSweepStakes.registerContestant(new Contestant(firstName, lastName, email));
+                    if (choice == 0)
+                    {
+                        Console.Write("First Name: ");
+                        string firstName = Console.ReadLine();
+                        Console.Write("Last Name: ");
+                        string lastName = Console.ReadLine();
+                        Console.Write("Email: ");
+                        string email = Console.ReadLine();
+
+                        currentSweepStakes.registerContestant(new Contestant(firstName, lastName, email));
+                    }
+                    if (choice == 1)
+                    {
+                        pickWinner(currentSweepStakes);
+                    }
                 }
-                if(choice == 1)
-                {
-                    Console.WriteLine($"Picking a winner for {currentSweepStakes.name}");
-                    Contestant winner = currentSweepStakes.pickWinner();
-                    Console.Write($"The winner is {winner.firstName} {winner.lastName}");
-                    
-                }
-            }
+            } while (sweepstakesManager != null);
             
         }
     }

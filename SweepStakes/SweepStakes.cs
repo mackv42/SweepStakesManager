@@ -31,25 +31,22 @@ namespace SweepStakes
         public void registerContestant(Contestant c)
         {
             Random rnd = new Random();
-            c.register(rnd.Next(100000, 999999));
-            contestants.Add(c.registration, c);
-            registrationNumbers.Add(c.registration);
-           
-            /*//preventing collisions of registration Num
+
+            //preventing collisions of registration Num
             while (true)
             {
                 try
                 {
                     c.register(rnd.Next(100000, 999999));
                     contestants.Add(c.registration, c);
-                    regstrationNumbers.Push(c.registration);
+                    registrationNumbers.Add(c.registration);
                     break;
                 }
                 catch (Exception E)
                 {
                     continue;
                 }
-            }*/
+            }
         }
 
     }

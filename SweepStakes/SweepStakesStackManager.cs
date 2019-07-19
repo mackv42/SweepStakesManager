@@ -20,7 +20,14 @@ namespace SweepStakes
 
         public SweepStakes GetSweepStakes()
         {
-            return sweepstakes.Pop();
+            try
+            {
+                return sweepstakes.Pop();
+            }
+            catch (Exception E)
+            {
+                return null;
+            }
         }
     }
 }
